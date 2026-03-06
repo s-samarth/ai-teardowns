@@ -1,0 +1,14 @@
+Initial commit: AI Teardowns - Technical Due Diligence Platform
+
+This initial commit establishes the AI Teardowns Next.js (App Router) codebase, configured as a fully static export to run on the Firebase Hosting free tier (Spark plan).
+
+Key architectural highlights of the codebase:
+- **Framework:** Next.js 14+ with static HTML/JS export (`output: 'export'`).
+- **Authentication:** Fully client-side Firebase Auth implementation (Email/Password) with `useAuth.ts` guarding Admin routes.
+- **Database:** Cloud Firestore with strict security rules and a dynamic collection strategy (`dev_teardowns` for local, `prod_teardowns` for production) to preserve a clean slate for live deployments.
+- **Storage:** Direct upload to Firebase Cloud Storage for thumbnails and presentation assets, secured by Storage rules.
+- **Routing:** Parameter-based dynamic routing (`/teardowns?id=slug`) to circumvent Next.js static export limitations on dynamic segments.
+- **Design System:** Brutalist, data-centric Tailwind CSS styling suited for institutional-grade research.
+- **Documentation:** Complete suite of architectural records including `system_design.md`, `product_overview.md`, `implementation_plan.md`, and `running_and_deployment_instructions.md`.
+
+This establishes the baseline functional end-to-end platform, encompassing public discovery and an administrative ingestion pipeline.

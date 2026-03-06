@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* ─── Colors ──────────────────────────────────────────────── */
+  --color-primary: #135bec;
+  --color-primary-hover: #1a6fff;
+  --color-background-dark: #101622;
+  --color-background-admin: #101622;
+  --color-background-card: #161e2e;
+  --color-neutral-dark: #161e2e;
+  --color-border-dark: #1f2937;
+  --color-border-medium: #374151;
+  --color-text-muted: #9ca3af;
+  --color-text-secondary: #6b7280;
+  --color-emerald: #10b981;
+  --color-amber: #f59e0b;
+  --color-sand: #fde68a;
+
+  /* ─── Fonts ───────────────────────────────────────────────── */
+  --font-display: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", "Roboto Mono", monospace;
+}
+
+/* ─── Base Styles ───────────────────────────────────────────── */
+html {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-background-admin);
+  color: #e4e4e7;
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+
+/* ─── Input Focus ───────────────────────────────────────────── */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 1px var(--color-primary);
+}
+
+/* ─── Line Clamp ────────────────────────────────────────────── */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ─── Upload Zone ───────────────────────────────────────────── */
+.upload-zone {
+  border: 2px dashed #333;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.upload-zone:hover,
+.upload-zone.drag-over {
+  border-color: var(--color-primary);
+  background-color: rgba(19, 91, 236, 0.05);
+}

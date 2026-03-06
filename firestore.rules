@@ -1,0 +1,50 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ─── Production Teardowns Collection ───────────────────────────────
+    match /prod_teardowns/{teardownId} {
+
+      // PUBLIC READ: Only published teardowns are accessible
+      allow read: if resource.data.status == 'published';
+
+      // ADMIN READ: Authenticated users can read all teardowns (including drafts)
+      allow read: if request.auth != null;
+
+      // ADMIN WRITE: Only authenticated users can create, update, or delete
+      allow create: if request.auth != null
+                    && request.resource.data.keys().hasAll(['name', 'description', 'status'])
+                    && request.resource.data.status in ['draft', 'published'];
+
+      allow update: if request.auth != null
+                    && request.resource.data.status in ['draft', 'published'];
+
+      allow delete: if request.auth != null;
+    }
+
+    // ─── Development Teardowns Collection ───────────────────────────────
+    match /dev_teardowns/{teardownId} {
+
+      // PUBLIC READ: Only published teardowns are accessible
+      allow read: if resource.data.status == 'published';
+
+      // ADMIN READ: Authenticated users can read all teardowns (including drafts)
+      allow read: if request.auth != null;
+
+      // ADMIN WRITE: Only authenticated users can create, update, or delete
+      allow create: if request.auth != null
+                    && request.resource.data.keys().hasAll(['name', 'description', 'status'])
+                    && request.resource.data.status in ['draft', 'published'];
+
+      allow update: if request.auth != null
+                    && request.resource.data.status in ['draft', 'published'];
+
+      allow delete: if request.auth != null;
+    }
+
+    // ─── Deny all other access ──────────────────────────────
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
